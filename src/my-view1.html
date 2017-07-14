@@ -11,22 +11,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 
+<link rel="import" href="content-editable.html">
+
 <dom-module id="my-view1">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
-
-        padding: 10px;
-      }
-
-      .card:focus {
-        outline: none;
       }
     </style>
-    <div class="card" contenteditable="true">
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+    <div class="card">
+      <content-editable></content-editable>
     </div>
   </template>
 

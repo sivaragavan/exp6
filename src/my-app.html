@@ -30,7 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="my-app">
   <template>
     <style>
-      :host {
+       :host {
         --app-primary-color: #4285f4;
         --app-secondary-color: black;
 
@@ -89,7 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar>
             <div main-title>CLOWriter</div>
             <span style="flex: 1;"></span>
-            <paper-icon-button icon="my-icons:message"></paper-icon-button>
+            <paper-icon-button icon="my-icons:message" on-click="getSelectionHtml"></paper-icon-button>
           </app-toolbar>
         </app-header>
 
@@ -125,6 +125,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return [
           '_routePageChanged(routeData.page)',
         ];
+      }
+
+      getSelectionHtml() {
+        console.log("Test : " + this.shadowRoot.getSelection().getRangeAt(0).cloneContents().innerHtml);
+
+        var html = "";
+        if (typeof this.shadowRoot.getSelection != "undefined") {
+          var sel = this.shadowRoot.getSelection();
+          console.log(sel);
+          if (sel.rangeCount) {
+            var container = document.createElement("div");
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+              container.appendChild(sel.getRangeAt(i).cloneContents());
+            }
+            html = container.innerHTML;
+          }
+        } else if (typeof document.selection != "undefined") {
+          if (document.selection.type == "Text") {
+            html = document.selection.createRange().htmlText;
+          }
+        }
+        console.log("Result: " + html);
       }
 
       constructor() {
